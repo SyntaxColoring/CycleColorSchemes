@@ -1,0 +1,4 @@
+[
+	{"keys": ["super+m"], "command": "cycle_color_scheme"},
+	{"keys": ["super+shift+m"], "command": "cycle_color_scheme", "args": {"reverse": true}}
+]
