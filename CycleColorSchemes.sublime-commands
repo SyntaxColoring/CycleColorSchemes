@@ -1,0 +1,6 @@
+[
+	{"caption": "Color scheme: Next in cycle", "command": "cycle_color_scheme"},
+	{"caption": "Color scheme: Previous in cycle", "command": "cycle_color_scheme", "args": {"reverse": true}},
+	{"caption": "Color scheme: Add current to cycle", "command": "add_color_scheme"},
+	{"caption": "Color scheme: Remove current from cycle", "command": "remove_color_scheme"}
+]
