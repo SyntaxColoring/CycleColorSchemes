@@ -12,19 +12,21 @@ class CycleColorSchemeCommand(sublime_plugin.ApplicationCommand):
 		settings = sublime.load_settings("Preferences.sublime-settings")
 		scheme_cycle = settings.get("cycled_color_schemes", [])
 		if scheme_cycle: # Only attempt cycling if there is something to cycle to.
-			if reverse: scheme_cycle.insert(0, scheme_cycle.pop()); # Rotate right.
+			if reverse: scheme_cycle.insert(0, scheme_cycle.pop()) # Rotate right.
 			else: scheme_cycle.append(scheme_cycle.pop(0)) # Rotate left.
 			settings.set("color_scheme", scheme_cycle[0])
 			settings.set("cycled_color_schemes", scheme_cycle)
 			sublime.save_settings("Preferences.sublime-settings")
+			sublime.status_message("Switched color scheme to " + scheme_cycle[0] + ".")
 	def is_enabled(args):
 		settings = sublime.load_settings("Preferences.sublime-settings")
 		scheme_cycle = settings.get("cycled_color_schemes", [])
+		
 		# Cycling only makes sense when there are at least two items in the cycle,
 		# or when there is only one item but it's different from what's actually
 		# being rendered.  In other words, cycling is only enabled when it could
 		# change what's being displayed.
-		return len(scheme_cycle) >= 2 or (scheme_cycle and settings.get("color_scheme") != scheme_cycle[0])
+		return len(scheme_cycle) >= 2 or (bool(scheme_cycle) and settings.get("color_scheme") != scheme_cycle[0])
 class AddColorSchemeCommand(sublime_plugin.ApplicationCommand):
 	def run(args):
 		settings = sublime.load_settings("Preferences.sublime-settings")
@@ -37,6 +39,8 @@ class AddColorSchemeCommand(sublime_plugin.ApplicationCommand):
 		settings.set("cycled_color_schemes", scheme_cycle)
 		sublime.save_settings("Preferences.sublime-settings")
 		
+		sublime.status_message("Added " + scheme_cycle[0] + " to cycle.")
+		
 class RemoveColorSchemeCommand(sublime_plugin.ApplicationCommand):
 	def run(args):
 		# To provide visual feedback for the command, move on to the next scheme
@@ -45,7 +49,8 @@ class RemoveColorSchemeCommand(sublime_plugin.ApplicationCommand):
 		
 		settings = sublime.load_settings("Preferences.sublime-settings")
 		scheme_cycle = settings.get("cycled_color_schemes", [])
-		scheme_cycle.pop(); # Remove the scheme (now at the end of the list from the previous line) so it's not shown in the next cycle.
+		# Remove the scheme (now at the end of the list from the previous line) so it's not shown in the next cycle.
+		sublime.status_message("Removed " + scheme_cycle.pop() + " from cycle.")
 		
 		settings.set("cycled_color_schemes", scheme_cycle)
 		sublime.save_settings("Preferences.sublime-settings")
