@@ -1,3 +1,7 @@
+*This plugin has been merged into [Schemr](https://github.com/benweier/Schemr), which has many more features.  (Thanks [benweier](https://github.com/benweier)!) I recommend trying that instead.  This repository is preserved in case you want something more lightweight.*
+
+---
+
 CycleColorSchemes is a plugin that lets you quickly switch between through your favorite color schemes in [Sublime Text 2](http://sublimetext.com/2) or [Sublime Text 3](http://sublimetext.com/3).
 
 Edit the `cycled_color_schemes` preference to tell the plugin which schemes you want to cycle through.  (You can also use **Add current to cycle** and **Remove current from cycle** in the command palette.)  For example, putting this in your settings file lets you toggle between Solarized light and dark:
